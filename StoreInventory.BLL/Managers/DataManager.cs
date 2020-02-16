@@ -25,13 +25,15 @@ namespace StoreInventory.BLL
         public StoreInventoryOverviewVm LoadView ()
         {
             StoreInventoryOverviewVm vm = new StoreInventoryOverviewVm();
-            vm.InventoryDbItems = GetInventoryDataFromDatabase();
+            var DataSearch = GetInventoryDataFromDatabase();
+            vm.StatisticItems = DataSearch.StatisticItems;
+            vm.Analysis = DataSearch.Analysis;
             vm.InventoryCsv = ReadFile();
             return vm;
         }
-        public string GetInventoryDataFromDatabase ()
+        public StoreInventoryOverviewVm GetInventoryDataFromDatabase ()
         {
-
+            StoreInventoryOverviewVm vm = new StoreInventoryOverviewVm();
             var InventoryItems = _UnitOfWork.StoreInventoryRepository.GetAll().Select(s=> new InventoryItem
             {
                 Date = s.Date,
@@ -68,11 +70,13 @@ namespace StoreInventory.BLL
                 ImportantTime = MostImportantTime.FirstOrDefault().TimeOfDayFormatted
             }).FirstOrDefault();
 
-       
+            vm.Analysis = JsonConvert.SerializeObject(Analysis);
+            vm.StatisticItems = InventoryItems;
 
-                
 
-            return JsonConvert.SerializeObject(Analysis);
+
+
+            return vm;
 
 
         }
@@ -126,9 +130,10 @@ namespace StoreInventory.BLL
             return Csv;
         }
 
-        public string FindDataByDates (DataRetrievalDto search)
+        public StoreInventoryOverviewVm FindDataByDates (DataRetrievalDto search)
         {
 
+            StoreInventoryOverviewVm vm = new StoreInventoryOverviewVm();
             var results = _UnitOfWork.StoreInventoryRepository.Get(w => w.Date >= search.FromTime && w.Date <= search.ToTime)
                                     .Select(s=> new InventoryItem
                                     {
@@ -149,6 +154,7 @@ namespace StoreInventory.BLL
 
 
 
+
             var Analysis = results.Select(s => new
             {
                 MaxPrice = results.Max(m => m.Price),
@@ -158,10 +164,11 @@ namespace StoreInventory.BLL
 
             }).FirstOrDefault();
 
+            vm.Analysis = JsonConvert.SerializeObject(Analysis);
+            vm.StatisticItems = results;
 
 
-
-            return JsonConvert.SerializeObject(Analysis);
+            return vm;
         }
 
         public bool StoreData (List<InventoryItem> data)

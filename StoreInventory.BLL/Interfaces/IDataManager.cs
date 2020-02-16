@@ -12,8 +12,8 @@ namespace StoreInventory.BLL.Interfaces
     {
         StoreInventoryOverviewVm LoadView();
         CsvVm ReadFile(HttpPostedFileBase file);
-        string GetInventoryDataFromDatabase();
-        string FindDataByDates(DataRetrievalDto search); 
+        StoreInventoryOverviewVm GetInventoryDataFromDatabase();
+        StoreInventoryOverviewVm FindDataByDates(DataRetrievalDto search);
         bool StoreData(List<InventoryItem> data);
     }
 }

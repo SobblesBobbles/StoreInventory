@@ -32,8 +32,9 @@ namespace StoreInventory.Controllers
         {
             var RefreshNewData = _DataManager.ReadFile(file);
             StoreInventoryOverviewVm vm = new StoreInventoryOverviewVm();
+            var DatabaseData = _DataManager.GetInventoryDataFromDatabase();
             vm.InventoryCsv = RefreshNewData;
-            vm.InventoryDbItems = _DataManager.GetInventoryDataFromDatabase();
+            vm.StatisticItems = DatabaseData.StatisticItems;
 
             return View("Inventory", vm);
         }
@@ -43,7 +44,9 @@ namespace StoreInventory.Controllers
         {
             StoreInventoryOverviewVm vm = new StoreInventoryOverviewVm();
             vm = _DataManager.LoadView();
-            vm.Analysis = _DataManager.FindDataByDates(search);
+            var DataSearch = _DataManager.FindDataByDates(search);
+            vm.Analysis = DataSearch.Analysis;
+            vm.StatisticItems = DataSearch.StatisticItems;
             return PartialView("_DataSearch", vm);
         }
 

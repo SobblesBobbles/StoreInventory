@@ -13,6 +13,7 @@ namespace StoreInventory.ViewModels
         public string Analysis { get; set; }
         public CsvVm  InventoryCsv { get; set; }
 
+        public List<InventoryItem> StatisticItems { get; set; }
 
         [Required(ErrorMessage = "End date is required *")]
         public DateTime? ToTime { get; set; }

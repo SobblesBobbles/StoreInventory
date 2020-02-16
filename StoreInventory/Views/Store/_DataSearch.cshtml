@@ -2,7 +2,7 @@
 @model StoreInventory.ViewModels.StoreInventoryOverviewVm
 
 @{
-    var data = Model.InventoryDbItems != null ? Model.InventoryDbItems : "";
+    var data = Model.Analysis != null ? Model.Analysis : "";
 }
 <script src="~/Scripts/jquery.validate.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
@@ -12,17 +12,21 @@
     <div class="panel-heading">
         <div class="panel-title">
             <i class="fa fa-bar-chart" aria-hidden="true"></i>
-             Data Visualisation
+            Data Visualisation
         </div>
     </div>
 
-    
+
+
+
+
+
     <div class="panel-body" id="SearchData">
         @using (Ajax.BeginForm("ViewDataByDate", "Store", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "divEmp" }, new { id = "DatesCheck" }))
         {
             @Html.ValidationSummary(true);
             <div>
-                @Html.ValidationMessageFor(f => f.FromTime, "", new {@style = "color:red; padding-right:25%;" })
+                @Html.ValidationMessageFor(f => f.FromTime, "", new { @style = "color:red; padding-right:25%;" })
                 @Html.ValidationMessageFor(f => f.ToTime, "", new { @style = "color:red;" })
             </div>
 
@@ -41,18 +45,36 @@
         }
         <div id="chartdiv"></div>
 
-  
-            <div style="width:100%;">
-                <i class="fa fa-clock-o" aria-hidden="true"></i>
-                
-                <span> Most Important Time of the day (24hr): &nbsp; <strong><span id="ImportantTime"></span></strong> </span>
 
-            </div>
-      
+        <table class="table" id="DataSearchTbl">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.StatisticItems)
+                {
+                    <tr>
+                        <td>@item.Date</td>
+                        <td>@item.Price</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div style="width:100%;">
+            <i class="fa fa-clock-o" aria-hidden="true"></i>
+
+            <span> Most Important Time of the day (24hr): &nbsp; <strong><span id="ImportantTime"></span></strong> </span>
+
+        </div>
 
 
 
-     
+
+
 
     </div>
 
@@ -65,6 +87,11 @@
 <script>
 
 
+        var Datatable = $('#DataSearchTbl').DataTable({
+        "paging": true,
+        "pageLength": 5,
+        "dom": '<"top">rt<"bottom"p><"clear">'
+    });
 
 
     $('#DatesCheck').submit(function (e) {
