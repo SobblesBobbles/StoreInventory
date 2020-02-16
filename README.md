@@ -23,7 +23,7 @@ operations:
 -A file of example data is provided called ‘ExportFile.csv’.  
 
 ## How to Use:
-###Data Management:
+### Data Management:
  In the data dashboard, it currently gets the csv at a specific location to read first.   
  If you would like to read a new file, click "Browse" and select the file,   
  you will then be asked if you would like to read the file or upload it to the database.  
