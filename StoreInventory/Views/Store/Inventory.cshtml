@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Inventory";
+}
+@model StoreInventory.ViewModels.StoreInventoryOverviewVm
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/js/bootstrap-datepicker.min.js"></script>
+
+<div class="container">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading text-center"> Store Dashboard</div>
+            <div class="panel-body">
+                <div class="col-md-5">
+
+                    @{
+                        Html.RenderPartial("_RawDataForm", Model.InventoryCsv);
+
+                    }
+                </div>
+
+                <div class="col-md-7">
+
+                    @{
+                        Html.RenderPartial("_DataSearch", Model);
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

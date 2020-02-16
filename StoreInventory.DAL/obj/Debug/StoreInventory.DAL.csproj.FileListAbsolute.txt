@@ -1,0 +1,10 @@
+C:\Users\Sobbles\Desktop\Projects\StoreInventory\StoreInventory.DAL\bin\Debug\StoreInventory.DAL.dll.config
+C:\Users\Sobbles\Desktop\Projects\StoreInventory\StoreInventory.DAL\bin\Debug\StoreInventory.DAL.dll
+C:\Users\Sobbles\Desktop\Projects\StoreInventory\StoreInventory.DAL\bin\Debug\StoreInventory.DAL.pdb
+C:\Users\Sobbles\Desktop\Projects\StoreInventory\StoreInventory.DAL\bin\Debug\EntityFramework.dll
+C:\Users\Sobbles\Desktop\Projects\StoreInventory\StoreInventory.DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Sobbles\Desktop\Projects\StoreInventory\StoreInventory.DAL\bin\Debug\EntityFramework.xml
+C:\Users\Sobbles\Desktop\Projects\StoreInventory\StoreInventory.DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Sobbles\Desktop\Projects\StoreInventory\StoreInventory.DAL\obj\Debug\StoreInventory.DAL.csproj.CopyComplete
+C:\Users\Sobbles\Desktop\Projects\StoreInventory\StoreInventory.DAL\obj\Debug\StoreInventory.DAL.dll
+C:\Users\Sobbles\Desktop\Projects\StoreInventory\StoreInventory.DAL\obj\Debug\StoreInventory.DAL.pdb

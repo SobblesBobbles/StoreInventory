@@ -1,0 +1,132 @@
+﻿
+@model StoreInventory.ViewModels.CsvVm
+
+
+
+
+    <div id="Partial" class="panel panel-default" >
+        <div class="panel-heading">
+            <i class="fa fa-database" aria-hidden="true"></i>
+             Data Management
+        </div>
+
+        <div class="panel-body">
+            <p> Please browse to the file you wish to read.</p>
+            <p>If you wish to upload to the database, browse to the file and click "upload".</p>
+            @using (Html.BeginForm("BrowseFile", "Store", FormMethod.Post, new { enctype = "multipart/form-data", id = "UploadForm" }))
+            {
+                <input type="file" name="file" id="FileUpload" style="margin:0px;" />
+
+
+                <span class="btn-group pull-right" role="group" >
+                    <button type="submit"   id="SubmitFileUpload"  class="btn btn-default">Read File</button>
+                    <button type="submit" id="StoreData" class="btn btn-default">Store Data</button>
+                  
+                </span>
+
+            }
+
+
+            <table class="table" id="DataCsvTbl">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.InventoryItemCsv)
+                    {
+                        <tr>
+                            <td>@item.Date</td>
+                            <td>@item.Price</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+
+
+
+
+
+        </div>
+    </div>
+
+
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
+
+<script>
+
+
+    $('#SubmitFileUpload').toggle();
+    $('#StoreData').toggle();
+
+
+    $('#FileUpload').on("change", function () {
+         $('#SubmitFileUpload').toggle();
+         $('#StoreData').toggle();
+    })
+
+     if ($.fn.DataTable.isDataTable('#DatesCheck')) {
+        $('#DatesCheck').DataTable().destroy();
+    
+     }
+
+    var Datatable = $('#DataCsvTbl').DataTable({
+        "paging": true,
+        "pageLength": 5,
+        "dom": '<"top">rt<"bottom"p><"clear">'
+    });
+
+
+  
+
+
+    $('#StoreData').on("click", function () {
+
+        var DataToPost = [];
+        Datatable.rows().every( function ( rowIdx, tableLoop, rowLoop ) {
+            var d = this.data();
+ 
+            var tempRow = {
+                  
+                Price: d[1],
+                  Date: d[0]
+            }
+               DataToPost.push(tempRow);
+        } );
+ 
+        //var rows = Datatable.rows().data();
+
+        //var DataToPost;
+        //rows.forEach(function (element) {
+        //    var tempRow = {
+        //        Date: element[0],
+        //        Price: element[1]
+        //    }
+        //    DataToPost.push(tempRow);
+
+        //})
+
+        Datatable.destroy();
+
+        DataToPost = JSON.stringify({ 'data': DataToPost });
+        $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                url: "StoreData",
+                type: "POST",
+                data: DataToPost, 
+            success: function (result) {
+                $(document).html(result);
+                }
+            });
+    })
+   
+
+
+
+
+</script>
