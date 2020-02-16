@@ -42,11 +42,7 @@ namespace StoreInventory.BLL
 
             TimeSpan result = new TimeSpan(0);
             string fromTimeString = result.ToString("hh':'mm");
-         
-
-
-    
-
+        
             var MostImportantTime = InventoryItems.AsEnumerable()
                   .GroupBy(row => row.Date.Hour)
                   .Select(grp => new TimeStatisticsVm
@@ -72,26 +68,16 @@ namespace StoreInventory.BLL
 
             vm.Analysis = JsonConvert.SerializeObject(Analysis);
             vm.StatisticItems = InventoryItems;
-
-
-
-
             return vm;
-
-
         }
         private CsvVm ReadFile()
         {
-   
            List<InventoryItemCsv> values = File.ReadAllLines("C:\\Users\\Sobbles\\Desktop\\Projects\\StoreInventory\\DataExports\\Inventory.csv")
                                .Skip(1)
                                .Select(v => InventoryItemCsv.FromCsv(v))
                                .ToList();
-
-
             CsvVm Csv = new CsvVm();
             Csv.InventoryItemCsv = values;
-            
             return Csv;
         }
 
@@ -99,9 +85,7 @@ namespace StoreInventory.BLL
         public CsvVm ReadFile(HttpPostedFileBase file)
         {
             string result;
-         
             CsvVm Csv = new CsvVm();
-
             List<InventoryItemCsv> Items = new List<InventoryItemCsv>();
             if (file != null)
             {
@@ -121,12 +105,8 @@ namespace StoreInventory.BLL
                             });
                     }
                 }
-
-
                 Csv.InventoryItemCsv = Items;
-
             }
-
             return Csv;
         }
 
@@ -152,9 +132,6 @@ namespace StoreInventory.BLL
                 TotalPriceForTheHour = grp.Sum(s => s.Price)
             }).OrderByDescending(o => o.TotalPriceForTheHour).ToList();
 
-
-
-
             var Analysis = results.Select(s => new
             {
                 MaxPrice = results.Max(m => m.Price),
@@ -166,7 +143,6 @@ namespace StoreInventory.BLL
 
             vm.Analysis = JsonConvert.SerializeObject(Analysis);
             vm.StatisticItems = results;
-
 
             return vm;
         }
@@ -187,8 +163,5 @@ namespace StoreInventory.BLL
             }
             return true;
         }
-
-
-
     }
 }

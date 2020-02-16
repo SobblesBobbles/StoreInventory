@@ -2,4 +2,3 @@ C:\Users\Sobbles\Desktop\Projects\StoreInventory\StoreInventory.ViewModels\bin\D
 C:\Users\Sobbles\Desktop\Projects\StoreInventory\StoreInventory.ViewModels\bin\Debug\StoreInventory.ViewModels.pdb
 C:\Users\Sobbles\Desktop\Projects\StoreInventory\StoreInventory.ViewModels\obj\Debug\StoreInventory.ViewModels.dll
 C:\Users\Sobbles\Desktop\Projects\StoreInventory\StoreInventory.ViewModels\obj\Debug\StoreInventory.ViewModels.pdb
-C:\Users\Sobbles\Desktop\Projects\StoreInventory\StoreInventory.ViewModels\obj\Debug\StoreInventory.ViewModels.csprojAssemblyReference.cache

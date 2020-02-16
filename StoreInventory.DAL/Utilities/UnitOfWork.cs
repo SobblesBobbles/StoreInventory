@@ -17,12 +17,7 @@ namespace StoreInventory.DAL.Utilities
         {
             _context = new DatabaseContext();
         }
-
-
         private Repository<EntityModels.StoreInventory> _StoreInventoryRepository;
-
-
-
         public Repository<EntityModels.StoreInventory> StoreInventoryRepository
         {
             get
@@ -34,7 +29,6 @@ namespace StoreInventory.DAL.Utilities
                 return _StoreInventoryRepository;
             }
         }
-
         public void SaveChanges()
         {
             _context.SaveChanges();

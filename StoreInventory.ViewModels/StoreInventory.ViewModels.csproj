@@ -48,7 +48,6 @@
     <Compile Include="InventoryItem.cs" />
     <Compile Include="InventoryItemCsv.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StatisticsVm.cs" />
     <Compile Include="StoreInventoryOverviewVm.cs" />
     <Compile Include="TimeStatisticsVm.cs" />
   </ItemGroup>
